@@ -1,12 +1,13 @@
 import React from 'react'
 import AuthTemplate from '../Component/auth/AuthTemplate';
-import AuthForm from '../Component/auth/AuthForm';
+import RegisterForm from '../containers/auth/RegisterForm';
+
 
 
 const RegisterPage = () => {
     return (
         <AuthTemplate>
-            <AuthForm type="register" />
+            <RegisterForm />
         </AuthTemplate>
     );
 };

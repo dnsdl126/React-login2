@@ -1,15 +1,48 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import 
+import { changeField, initializeForm } from '../../modules/auth'
+import AuthForm from '../../Component/auth/AuthForm';
 
 
-const LoginFormBlock= styled.div``;
+
 const LoginForm = () => {
+    const dispatch = useDispatch()
+    const { form } = useSelector(({auth})=>({
+        form : auth.login
+    })) 
+    //인풋 변경 핸들러
+    const onChange = e => {
+        const {value, name} = e.target;
+        dispatch (
+            changeField({
+                form: 'login',
+                key: name,
+                value
+            })
+        );
+    };
+
+    //폼 등록 이벤트 핸들러
+    const onSubmit = e => {
+        e.preventDefault();
+        //구형 예정
+    };
+
+    //컴포넌트가 처음 렌더링될때 form을 초기화함
+    useEffect(() => {
+        dispatch(initializeForm('login'));
+        }, [dispatch])
+
+
+
     return (
-        <LoginFormBlock>
-            teset
-        </LoginFormBlock>
-    )
-}
+        <AuthForm
+        type="login"
+        form={form}
+        onChange={onChange}
+        onSubmit={onSubmit}
+            />                    
+    );
+};
 
 export default LoginForm;
